@@ -8,8 +8,8 @@ define(['framework/level'], function(_level){
 
     beforeEach(function(){
       level = _level('test_level');
-      game_object = { render: function(){} };
-      spyOn(game_object, 'render');
+      game_object = { update: function(){} };
+      spyOn(game_object, 'update');
     });
 
     it('should have a name', function(){
@@ -22,24 +22,24 @@ define(['framework/level'], function(_level){
     });
 
     describe('when activating the level', function(){
-      it('should call render on each game_object', function(){
+      it('should call update on each game_object', function(){
         level.add_game_object(game_object);
-        expect(game_object.render).not.toHaveBeenCalled();
+        expect(game_object.update).not.toHaveBeenCalled();
         level.active();
 
         waitsFor(function() {
-          return game_object.render.callCount > 1;
-        }, 'Render should be called', 100);
+          return game_object.update.callCount > 1;
+        }, 'update should be called', 100);
         
         runs(function(){
-          expect(game_object.render).toHaveBeenCalled();
+          expect(game_object.update).toHaveBeenCalled();
         });
 
       });
     });
 
     describe('when desactivating the level', function(){
-      it('should stop calling render on each game_object', function(){
+      it('should stop calling update on each game_object', function(){
         level.add_game_object(game_object);
         
         var call_count;
@@ -47,12 +47,12 @@ define(['framework/level'], function(_level){
         level.active();
 
         waitsFor(function() {
-          return game_object.render.callCount > 1;
-        }, 'Render should be called', 100);
+          return game_object.update.callCount > 1;
+        }, 'update should be called', 100);
         
         runs(function(){
           level.unactive();
-          call_count = game_object.render.callCount;
+          call_count = game_object.update.callCount;
           
           setTimeout(function() {
             wait = true;
@@ -65,7 +65,7 @@ define(['framework/level'], function(_level){
         }, 'Wainting to see if there is no more calls', 100);
 
         runs(function(){
-          expect(game_object.render.callCount).toBe(call_count);
+          expect(game_object.update.callCount).toBe(call_count);
         });
 
       });

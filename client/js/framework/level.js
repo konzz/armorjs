@@ -2,8 +2,8 @@
 
 define(['underscore'], function(_){
   return function(name){
-    var rendering = false;
-    var rendering_speed = 20;
+    var active = false;
+    var update_speed = 20;
     
     var level = {
       name: name,
@@ -14,25 +14,25 @@ define(['underscore'], function(_){
       },
 
       active: function(){
-        if(!rendering){
-          rendering = window.setInterval(render_game_objects, rendering_speed);
+        if(!active){
+          active = window.setInterval(update_game_objects, update_speed);
         }
       },
 
       unactive: function(){
-        window.clearInterval(rendering);
-        rendering = false;
+        window.clearInterval(active);
+        active = false;
       }
     };
 
 
-    function render_game_objects(){
-      if(!rendering) {
+    function update_game_objects(){
+      if(!active) {
         return;
       }
 
       _(level.game_objects).each(function(game_object){
-        game_object.render();
+        game_object.update();
       });
     }
 
