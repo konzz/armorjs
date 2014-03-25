@@ -18,6 +18,7 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
+  "boss": true,
   "globals": {
     "angular": true, "describe": true, "beforeEach": true,
     "expect": true, "it": true, "inject": true, "spyOn": true,
