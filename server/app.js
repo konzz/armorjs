@@ -10,3 +10,5 @@ app.get('/', function(req, res){
 });
 app.use(express.logger('dev'));
 app.use('/', express.static(__dirname + '/../client'));
+
+console.log('Server listening at localhost:8080');
