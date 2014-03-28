@@ -4,26 +4,33 @@ define(['level'], function(_level){
   describe('level module', function(){
 
     var level;
-    var game_object;
 
     beforeEach(function(){
       level = _level('test_level');
-      game_object = { update: function(){} };
-      spyOn(game_object, 'update');
     });
 
     it('should have a name', function(){
       expect(level.name).toBe('test_level');
     });
 
-    it('should be able to store game_objects', function(){
-      level.add_game_object(game_object);
-      expect(level.game_objects[0]).toBe(game_object);
+    describe('object()', function(){
+      it('should create and return new game object', function(){
+        var player_object = level.object('player');
+        expect(player_object.name).toBe('player');
+      });
+
+      it('should add it to the objects lists', function(){
+        var player_object = level.object('player');
+        expect(level.objects[0]).toBe(player_object);
+      });
     });
 
     describe('when activating the level', function(){
       it('should call update on each game_object', function(){
-        level.add_game_object(game_object);
+        
+        var game_object = level.object('game_object');
+        spyOn(game_object, 'update');
+
         expect(game_object.update).not.toHaveBeenCalled();
         level.active();
 
@@ -40,7 +47,8 @@ define(['level'], function(_level){
 
     describe('when desactivating the level', function(){
       it('should stop calling update on each game_object', function(){
-        level.add_game_object(game_object);
+        var game_object = level.object('game_object');
+        spyOn(game_object, 'update');
         
         var call_count;
         var wait = false;

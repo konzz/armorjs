@@ -12,7 +12,7 @@ define(['underscore'], function(_){
       position: {x: 0, y:0},
       
       add_component: function(key, component) {
-        component.game_object = this;
+        component.object = this;
         this.components[key] = component;
       },
 
