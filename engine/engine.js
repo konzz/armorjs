@@ -1,7 +1,7 @@
 'use strict';
 
 
-define(['./level'], function(level){
+define(['engine/level'], function(level){
   return {
     game: function(canvas_id){
 

@@ -1,6 +1,6 @@
 'use strict';
 
-define(['object'], function(_object){
+define(['engine/object'], function(_object){
   describe('object module', function(){
 
     var object;

@@ -5,7 +5,9 @@
   "ignore": [
   ],
   "dependencies": {
-    "underscore": "1.6.0"
+    "underscore": "1.6.0",
+    "physicsjs": "0.6.0",
+    "requirejs": "2.1.9"
   },
   "devDependencies": {
     "jquery": "1.11.0"

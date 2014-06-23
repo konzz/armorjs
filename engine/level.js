@@ -1,6 +1,6 @@
 'use strict';
 
-define(['underscore', 'object'], function(_, object){
+define(['underscore', 'engine/object'], function(_, object){
   return function(name){
     var active = false;
     var update_speed = 20;

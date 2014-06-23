@@ -1,6 +1,6 @@
 'use strict';
 
-define(['level'], function(_level){
+define(['engine/level'], function(_level){
   describe('level module', function(){
 
     var level;

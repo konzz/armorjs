@@ -1,6 +1,6 @@
 'use strict';
 
-define(['engine', 'underscore', 'jquery'], function(engine, _, $){
+define(['engine/engine', 'underscore', 'jquery'], function(engine, _, $){
   describe('engine', function(){
     var game, canvas;
     
