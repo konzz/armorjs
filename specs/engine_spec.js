@@ -20,26 +20,26 @@ define(['engine/engine', 'underscore', 'jquery'], function(engine, _, $){
         expect(game.ctx).toBe(element_ctx);
       });
 
-      describe('play_level', function(){
+      describe('play', function(){
         it('should activate that level', function(){
           var level = game.level('loading_screen');
-          spyOn(level, 'active');
+          spyOn(level, 'play');
           
           game.play('loading_screen');
 
-          expect(level.active).toHaveBeenCalled();
+          expect(level.play).toHaveBeenCalled();
         });
 
-        it('should unactive the current level', function(){
+        it('should stop the current level', function(){
           var loading_screen = game.level('loading_screen');
-          spyOn(loading_screen, 'unactive');
+          spyOn(loading_screen, 'stop');
 
           game.level('first_map');
           
           game.play('loading_screen');
           game.play('first_map');
 
-          expect(loading_screen.unactive).toHaveBeenCalled();
+          expect(loading_screen.stop).toHaveBeenCalled();
         });
 
         describe('level()', function(){

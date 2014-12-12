@@ -1,11 +1,17 @@
 'use strict';
 
-define(['engine/level'], function(_level){
+define(['engine/level', 'engine/game_object', 'engine/time'], function(_level, _game_object, time){
   describe('level module', function(){
 
     var level;
+    var level_update_method;
 
     beforeEach(function(){
+      
+      spyOn(time, 'onStep').and.callFake(function(callback){
+        level_update_method = callback;
+      });
+
       level = _level('test_level');
     });
 
@@ -13,68 +19,39 @@ define(['engine/level'], function(_level){
       expect(level.name).toBe('test_level');
     });
 
-    describe('object()', function(){
-      it('should create and return new game object', function(){
-        var player_object = level.object('player');
-        expect(player_object.name).toBe('player');
-      });
-
-      it('should add it to the objects lists', function(){
-        var player_object = level.object('player');
-        expect(level.objects[0]).toBe(player_object);
-      });
-    });
-
-    describe('when activating the level', function(){
+    describe('when playing the level', function(){
       it('should call update on each game_object', function(){
         
-        var game_object = level.object('game_object');
-        spyOn(game_object, 'update');
-
-        expect(game_object.update).not.toHaveBeenCalled();
-        level.active();
-
-        waitsFor(function() {
-          return game_object.update.callCount > 1;
-        }, 'update should be called', 100);
+        var gameObject = _game_object('game_object');
+        level.addGameObject(gameObject);
         
-        runs(function(){
-          expect(game_object.update).toHaveBeenCalled();
-        });
+        spyOn(gameObject, 'update');
 
+        expect(gameObject.update).not.toHaveBeenCalled();
+        
+        level.play();
+        level_update_method();
+
+        expect(gameObject.update).toHaveBeenCalled();
       });
     });
 
-    describe('when desactivating the level', function(){
+    describe('when stoping the level', function(){
       it('should stop calling update on each game_object', function(){
-        var game_object = level.object('game_object');
-        spyOn(game_object, 'update');
-        
-        var call_count;
-        var wait = false;
-        level.active();
+        var gameObject = _game_object('game_object');
+        level.addGameObject(gameObject);
 
-        waitsFor(function() {
-          return game_object.update.callCount > 1;
-        }, 'update should be called', 100);
-        
-        runs(function(){
-          level.unactive();
-          call_count = game_object.update.callCount;
-          
-          setTimeout(function() {
-            wait = true;
-          }, 25);
+        spyOn(gameObject, 'update');
 
-        });
+        level.play();
+        level_update_method();
 
-        waitsFor(function() {
-          return wait;
-        }, 'Wainting to see if there is no more calls', 100);
+        expect(gameObject.update.calls.count()).toBe(1);
 
-        runs(function(){
-          expect(game_object.update.callCount).toBe(call_count);
-        });
+        level.stop();
+        level_update_method();
+
+        expect(gameObject.update.calls.count()).toBe(1);
 
       });
     });

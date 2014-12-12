@@ -18,9 +18,9 @@ define(['engine/level'], function(level){
 
         play: function(level_name){
           if(this.current_level) {
-            this.current_level.unactive();
+            this.current_level.stop();
           }
-          this.levels[level_name].active();
+          this.levels[level_name].play();
           this.current_level = this.levels[level_name];
         }
       };
