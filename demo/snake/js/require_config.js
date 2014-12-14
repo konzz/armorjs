@@ -10,7 +10,3 @@ require.config({
     }
   },
 });
-
-require(['engine/engine'], function(engine){
-
-});
