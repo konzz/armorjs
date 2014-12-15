@@ -1,7 +1,7 @@
 'use strict';
 
-define(['engine/engine', 'underscore', 'jquery'], function(engine, _, $){
-  describe('engine', function(){
+define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
+  describe('game', function(){
     var game, canvas;
     
     beforeEach(function(){
@@ -22,7 +22,8 @@ define(['engine/engine', 'underscore', 'jquery'], function(engine, _, $){
 
       describe('play', function(){
         it('should activate that level', function(){
-          var level = game.level('loading_screen');
+          var level = engine.level('loading_screen');
+          game.addLevel(level);
           spyOn(level, 'play');
           
           game.play('loading_screen');
@@ -31,10 +32,13 @@ define(['engine/engine', 'underscore', 'jquery'], function(engine, _, $){
         });
 
         it('should stop the current level', function(){
-          var loading_screen = game.level('loading_screen');
-          spyOn(loading_screen, 'stop');
+          var loading_screen = engine.level('loading_screen');
+          var first_map = engine.level('first_map');
 
-          game.level('first_map');
+          game.addLevel(loading_screen);
+          game.addLevel(first_map);
+          
+          spyOn(loading_screen, 'stop');
           
           game.play('loading_screen');
           game.play('first_map');
@@ -42,19 +46,17 @@ define(['engine/engine', 'underscore', 'jquery'], function(engine, _, $){
           expect(loading_screen.stop).toHaveBeenCalled();
         });
 
-        describe('level()', function(){
-          it('it returns a new level', function(){
-            var level = game.level('intro');
-            expect(level.name).toBe('intro');
-          });
+        describe('addLevel()', function(){
 
           it('adds it to the level list of the game', function(){
-            var level = game.level('intro');
-            expect(level).toBe(game.levels['intro']);
+            var level = {name: 'test'};
+            game.addLevel(level);
+            expect(level).toBe(game.levels['test']);
           });
 
           it('adds the canvas context to the level', function(){
-            var level = game.level('intro');
+            var level = {name: 'test'};
+            game.addLevel(level);
             expect(level.ctx).toBe(game.ctx);
           });
         });
