@@ -1,15 +1,21 @@
 'use strict';
 
 
-define(function(){
+define(['engine/time'],function(time){
   return function(canvas_id){
+    
+    var canvas = document.getElementById(canvas_id);
+    var ctx = canvas.getContext('2d');
+
+    time.start();
+
     return {
       levels: {},
       current_level: null,
-      ctx: document.getElementById(canvas_id).getContext('2d'),
+      ctx: ctx,
 
       addLevel: function(level){
-        level.ctx = this.ctx;
+        level.setCtx(ctx);
         this.levels[level.name] = level;
       },
 

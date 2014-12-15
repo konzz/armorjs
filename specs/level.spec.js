@@ -1,6 +1,6 @@
 'use strict';
 
-define(['engine/level', 'engine/game_object', 'engine/time'], function(_level, _game_object, time){
+define(['engine/engine'], function(engine){
   describe('level module', function(){
 
     var level;
@@ -8,21 +8,41 @@ define(['engine/level', 'engine/game_object', 'engine/time'], function(_level, _
 
     beforeEach(function(){
       
-      spyOn(time, 'onStep').and.callFake(function(callback){
+      spyOn(engine.time, 'onStep').and.callFake(function(callback){
         level_update_method = callback;
       });
 
-      level = _level('test_level');
+      level = engine.level('test_level');
     });
 
     it('should have a name', function(){
       expect(level.name).toBe('test_level');
     });
+    
+    describe('addGameObject', function(){
+      it('should add the game to the list', function(){
+        var bullet = engine.game_object('bullet');
+        level.addGameObject(bullet);
+        expect(level.objects[0]).toBe(bullet);
+      });
+    });
+    
+    describe('setCtx', function(){
+    
+      it('should store the ctx and set it to all the game objects', function(){
+        var bullet = engine.game_object('bullet');
+        level.addGameObject(bullet);
+        var ctx = {};
+        level.setCtx(ctx);
+        expect(level.ctx).toBe(ctx);
+        expect(bullet.ctx).toBe(ctx);
+      });
+    });
 
     describe('when playing the level', function(){
       it('should call update on each game_object', function(){
         
-        var gameObject = _game_object('game_object');
+        var gameObject = engine.game_object('game_object');
         level.addGameObject(gameObject);
         
         spyOn(gameObject, 'update');
@@ -38,7 +58,7 @@ define(['engine/level', 'engine/game_object', 'engine/time'], function(_level, _
 
     describe('when stoping the level', function(){
       it('should stop calling update on each game_object', function(){
-        var gameObject = _game_object('game_object');
+        var gameObject = engine.game_object('game_object');
         level.addGameObject(gameObject);
 
         spyOn(gameObject, 'update');

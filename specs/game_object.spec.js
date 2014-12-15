@@ -24,6 +24,17 @@ define(['engine/game_object'], function(_object){
       });
     });
 
+    describe('setCtx', function(){
+    
+      it('should save the ctx and set it to all the components', function(){
+        var ctx = {};
+        object.add_component('test_component', component);
+        object.setCtx(ctx);
+        expect(object.ctx).toBe(ctx);
+        expect(component.ctx).toBe(ctx);
+      });
+    });
+
     it('should have a position', function(){
       expect(object.position.x).toBe(0);
       expect(object.position.y).toBe(0);

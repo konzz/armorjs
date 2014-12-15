@@ -49,13 +49,13 @@ define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
         describe('addLevel()', function(){
 
           it('adds it to the level list of the game', function(){
-            var level = {name: 'test'};
+            var level = engine.level('test');
             game.addLevel(level);
             expect(level).toBe(game.levels['test']);
           });
 
           it('adds the canvas context to the level', function(){
-            var level = {name: 'test'};
+            var level = engine.level('test');
             game.addLevel(level);
             expect(level.ctx).toBe(game.ctx);
           });

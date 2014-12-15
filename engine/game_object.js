@@ -16,6 +16,13 @@ define(['underscore'], function(_){
         this.components[key] = component;
       },
 
+      setCtx: function(ctx){
+        this.ctx = ctx;
+        _(this.components).each(function(component){
+          component.ctx = ctx;
+        });
+      },
+
       update: function(){
         _(this.components).each(function(component){
           component.update();

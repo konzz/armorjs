@@ -16,7 +16,6 @@ define(['underscore'], function(_){
     start: function(){
 
       window.requestAnimationFrame(function(timestamp){
-        
         if(time.startTime === undefined){
           time.startTime = timestamp;
         }
