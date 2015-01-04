@@ -27,19 +27,26 @@ define(['engine/engine'], function(engine){
       });
     });
     
-    describe('setCtx', function(){
+    describe('setCanvas', function(){
     
-      it('should store the ctx and set it to all the game objects', function(){
+      it('should store the canvas and set the context to all the game objects', function(){
         var bullet = engine.game_object('bullet');
         level.addGameObject(bullet);
-        var ctx = {};
-        level.setCtx(ctx);
-        expect(level.ctx).toBe(ctx);
-        expect(bullet.ctx).toBe(ctx);
+        var canvas = $('<canvas id="game_canvas"></canvas>')[0];
+        level.setCanvas(canvas);
+        expect(level.canvas).toBe(canvas);
+        expect(bullet.ctx).toBe(canvas.getContext('2d'));
       });
     });
 
     describe('when playing the level', function(){
+      var canvas;
+
+      beforeEach(function(){
+        canvas = $('<canvas id="game_canvas"></canvas>')[0];
+        level.setCanvas(canvas);
+      });
+
       it('should call update on each game_object', function(){
         
         var gameObject = engine.game_object('game_object');
@@ -54,10 +61,26 @@ define(['engine/engine'], function(engine){
 
         expect(gameObject.update).toHaveBeenCalled();
       });
+
+      it('should clear the canvas on each step', function(){
+        
+        
+        var ctx = canvas.getContext('2d');
+        spyOn(ctx, 'clearRect');
+        
+        level.play();
+        level_update_method();
+
+        expect(ctx.clearRect).toHaveBeenCalledWith(0,0,canvas.width,canvas.height);
+      });
+
     });
 
     describe('when stoping the level', function(){
       it('should stop calling update on each game_object', function(){
+        var canvas = $('<canvas id="game_canvas"></canvas>')[0];
+        level.setCanvas(canvas);
+
         var gameObject = engine.game_object('game_object');
         level.addGameObject(gameObject);
 

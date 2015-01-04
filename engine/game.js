@@ -5,17 +5,16 @@ define(['engine/time'],function(time){
   return function(canvas_id){
     
     var canvas = document.getElementById(canvas_id);
-    var ctx = canvas.getContext('2d');
 
     time.start();
 
     return {
       levels: {},
       current_level: null,
-      ctx: ctx,
+      canvas: canvas,
 
       addLevel: function(level){
-        level.setCtx(ctx);
+        level.setCanvas(canvas);
         this.levels[level.name] = level;
       },
 

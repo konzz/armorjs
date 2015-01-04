@@ -1,7 +1,7 @@
 'use strict';
 
 define(['engine/game', 'engine/level', 'engine/game_object', 'engine/time'],
-function(game, level, game_object, time){
+function(game, level, game_object, time, canvas){
   return {
     game: game,
     level: level,

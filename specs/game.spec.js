@@ -15,9 +15,8 @@ define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
     });
 
     describe('game', function(){
-      it('should define the ctx that is the 2d context of the canvas', function(){
-        var element_ctx = canvas.getContext('2d');
-        expect(game.ctx).toBe(element_ctx);
+      it('should get the canvas and store it', function(){
+        expect(game.canvas).toBe(canvas);
       });
 
       describe('play', function(){
@@ -54,10 +53,10 @@ define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
             expect(level).toBe(game.levels['test']);
           });
 
-          it('adds the canvas context to the level', function(){
+          it('adds the canvas to the level', function(){
             var level = engine.level('test');
             game.addLevel(level);
-            expect(level.ctx).toBe(game.ctx);
+            expect(level.canvas).toBe(game.canvas);
           });
         });
       });

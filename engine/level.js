@@ -18,10 +18,11 @@ define(['underscore', 'engine/time'], function(_, time){
         level.objects.push(object);
       },
 
-      setCtx: function(ctx){
-        this.ctx = ctx;
+      setCanvas: function(canvas){
+        level.canvas = canvas;
+        level.ctx = canvas.getContext('2d');
         _(level.objects).each(function(object){
-          object.setCtx(ctx);
+          object.setCtx(level.ctx);
         });
       },
 
@@ -33,6 +34,7 @@ define(['underscore', 'engine/time'], function(_, time){
         return;
       }
 
+      level.ctx.clearRect(0,0,level.canvas.width,level.canvas.height);
       _(level.objects).each(function(object){
         object.update();
       });
