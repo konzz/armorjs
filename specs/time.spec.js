@@ -5,7 +5,7 @@ define(['engine/time'], function(time){
 
     var frameCallback;
     beforeEach(function(){
-      
+
       spyOn(window, 'requestAnimationFrame').and.callFake(function(callback){
         frameCallback = callback;
       });
@@ -17,21 +17,21 @@ define(['engine/time'], function(time){
     describe('onStep', function(){
       it('should call the callbacks using requestAnimationFrame()', function(){
         var spy = jasmine.createSpy('updateGameObject');
-        
+
         time.onStep(spy);
-        
+
         frameCallback(0);
 
         expect(spy).toHaveBeenCalled();
       });
     });
-    
+
     describe('deltaTime', function(){
-    
+
       it('should be the time since last frame in seconds with 3 decimals precision', function(){
         frameCallback(0);
         frameCallback(1000);
-        
+
         expect(time.deltaTime).toBe(1);
 
         frameCallback(1505);

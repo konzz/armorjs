@@ -25,7 +25,7 @@ define(['engine/game_object'], function(_object){
     });
 
     describe('setCtx', function(){
-    
+
       it('should save the ctx and set it to all the components', function(){
         var ctx = {};
         object.add_component('test_component', component);

@@ -12,7 +12,7 @@ define(['underscore'], function(_){
     onStep: function(callback){
       callbacks.push(callback);
     },
-    
+
     start: function(){
 
       window.requestAnimationFrame(function(timestamp){

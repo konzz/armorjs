@@ -3,7 +3,7 @@
 
 define(['engine/time'],function(time){
   return function(canvas_id){
-    
+
     var canvas = document.getElementById(canvas_id);
 
     time.start();

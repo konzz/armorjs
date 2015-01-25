@@ -7,7 +7,7 @@ define(['engine/engine'], function(engine){
     var level_update_method;
 
     beforeEach(function(){
-      
+
       spyOn(engine.time, 'onStep').and.callFake(function(callback){
         level_update_method = callback;
       });
@@ -18,7 +18,7 @@ define(['engine/engine'], function(engine){
     it('should have a name', function(){
       expect(level.name).toBe('test_level');
     });
-    
+
     describe('addGameObject', function(){
       it('should add the game to the list', function(){
         var bullet = engine.game_object('bullet');
@@ -26,9 +26,9 @@ define(['engine/engine'], function(engine){
         expect(level.objects[0]).toBe(bullet);
       });
     });
-    
+
     describe('setCanvas', function(){
-    
+
       it('should store the canvas and set the context to all the game objects', function(){
         var bullet = engine.game_object('bullet');
         level.addGameObject(bullet);
@@ -48,14 +48,14 @@ define(['engine/engine'], function(engine){
       });
 
       it('should call update on each game_object', function(){
-        
+
         var gameObject = engine.game_object('game_object');
         level.addGameObject(gameObject);
-        
+
         spyOn(gameObject, 'update');
 
         expect(gameObject.update).not.toHaveBeenCalled();
-        
+
         level.play();
         level_update_method();
 
@@ -63,11 +63,11 @@ define(['engine/engine'], function(engine){
       });
 
       it('should clear the canvas on each step', function(){
-        
-        
+
+
         var ctx = canvas.getContext('2d');
         spyOn(ctx, 'clearRect');
-        
+
         level.play();
         level_update_method();
 

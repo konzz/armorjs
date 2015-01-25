@@ -3,7 +3,7 @@
 define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
   describe('game', function(){
     var game, canvas;
-    
+
     beforeEach(function(){
       canvas = $('<canvas id="game_canvas"></canvas>')[0];
       $(document.body).append(canvas);
@@ -24,7 +24,7 @@ define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
           var level = engine.level('loading_screen');
           game.addLevel(level);
           spyOn(level, 'play');
-          
+
           game.play('loading_screen');
 
           expect(level.play).toHaveBeenCalled();
@@ -36,9 +36,9 @@ define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
 
           game.addLevel(loading_screen);
           game.addLevel(first_map);
-          
+
           spyOn(loading_screen, 'stop');
-          
+
           game.play('loading_screen');
           game.play('first_map');
 
@@ -50,7 +50,7 @@ define(['engine/engine','underscore', 'jquery'], function(engine, _, $){
           it('adds it to the level list of the game', function(){
             var level = engine.level('test');
             game.addLevel(level);
-            expect(level).toBe(game.levels['test']);
+            expect(level).toBe(game.levels.test);
           });
 
           it('adds the canvas to the level', function(){
