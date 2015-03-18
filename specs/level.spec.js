@@ -64,7 +64,6 @@ define(['engine/engine'], function(engine){
 
       it('should clear the canvas on each step', function(){
 
-
         var ctx = canvas.getContext('2d');
         spyOn(ctx, 'clearRect');
 

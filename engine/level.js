@@ -35,6 +35,7 @@ define(['underscore', 'engine/time'], function(_, time){
       }
 
       level.ctx.clearRect(0,0,level.canvas.width,level.canvas.height);
+      
       _(level.objects).each(function(object){
         object.update();
       });
