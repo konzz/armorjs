@@ -14,25 +14,28 @@ define(['underscore'], function(_){
     },
 
     start: function(){
-
-      window.requestAnimationFrame(function(timestamp){
-        if(time.startTime === undefined){
-          time.startTime = timestamp;
-        }
-
-        if(lastFrame === undefined){
-          lastFrame = timestamp;
-        }
-
-        time.deltaTime = (timestamp - lastFrame) / 1000;
-        lastFrame = timestamp;
-
-        _(callbacks).each(function(callback){
-          callback();
-        });
-      });
+      window.requestAnimationFrame(step);
     }
   };
+
+  function step(timestamp){
+    if(time.startTime === undefined){
+      time.startTime = timestamp;
+    }
+
+    if(lastFrame === undefined){
+      lastFrame = timestamp;
+    }
+
+    time.deltaTime = (timestamp - lastFrame) / 1000;
+    lastFrame = timestamp;
+
+    _(callbacks).each(function(callback){
+      callback();
+    });
+
+    window.requestAnimationFrame(step);
+  }
 
   return time;
 });

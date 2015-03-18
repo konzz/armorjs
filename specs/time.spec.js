@@ -14,6 +14,21 @@ define(['engine/time'], function(time){
 
     });
 
+    describe('start', function(){
+      it('should call requestAnimationFrame', function(){
+        time.start();
+        expect(window.requestAnimationFrame).toHaveBeenCalled();
+      });
+
+      it('should call requestAnimationFrame with a callback that calls again to requestAnimationFrame with himself', function(){
+        time.start();
+        expect(window.requestAnimationFrame.calls.count()).toBe(2);
+        frameCallback()
+        expect(window.requestAnimationFrame.calls.count()).toBe(3);
+        expect(window.requestAnimationFrame.calls.mostRecent().args[0]).toBe(frameCallback);
+      });
+    });
+
     describe('onStep', function(){
       it('should call the callbacks using requestAnimationFrame()', function(){
         var spy = jasmine.createSpy('updateGameObject');
