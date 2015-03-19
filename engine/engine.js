@@ -1,11 +1,12 @@
 'use strict';
 
-define(['engine/game', 'engine/level', 'engine/game_object', 'engine/time'],
-function(game, level, game_object, time, canvas){
+define(['./game', './level', './game_object', './time', './vector2'],
+function(game, level, game_object, time, v2){
   return {
     game: game,
     level: level,
     game_object: game_object,
-    time: time
+    time: time,
+    v2: v2
   };
 });
