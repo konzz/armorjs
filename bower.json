@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "path/to/main.css",
   "ignore": [
+    "demo"
   ],
   "dependencies": {
     "underscore": "1.6.0",
