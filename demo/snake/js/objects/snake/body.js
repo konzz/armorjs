@@ -1,19 +1,21 @@
 'use strict';
 
-define(function(){
+define(['engine/engine'], function(engine){
+    var link_size = 5;
     var body = {
 
-      position: {x: 25, y: 25},
+      position: engine.v2.new(25, 25),
+      velocity: engine.v2.new(5, 0),
 
       update: function(){
-        body.position.x++;
+        body.position.add(body.velocity);
         draw();
       }
     }
 
     function draw() {
       body.ctx.beginPath();
-      body.ctx.rect(body.position.x, body.position.y, 20, 10);
+      body.ctx.rect(body.position.x, body.position.y, link_size, link_size);
       body.ctx.fill();
       body.ctx.closePath();
     }
