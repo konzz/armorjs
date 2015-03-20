@@ -17,7 +17,16 @@ define(['objects/snake/body', 'engine/engine', 'engine/mocks'], function(body, e
         snake_body.update();
 
         expect(snake_body.position.x).toBe(35);
-      })
+      });
+
+      it('should draw the head of the snake', function(){
+        spyOn(mocks.ctx, 'rect');
+        snake_body.update();
+
+        expect(mocks.ctx.rect).toHaveBeenCalledWith(snake_body.position.x,
+                                                    snake_body.position.y,
+                                                    10, 10);
+      });
     });
 
   });
