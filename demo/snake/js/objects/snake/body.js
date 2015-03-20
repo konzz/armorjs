@@ -1,24 +1,36 @@
 'use strict';
 
 define(['engine/engine'], function(engine){
-    var link_size = 5;
-    var body = {
+    return function(){
+      var link_size = 10;
+      var head = {
 
-      position: engine.v2.new(25, 25),
-      velocity: engine.v2.new(5, 0),
+        position: engine.v2.new(25, 25),
+        velocity: engine.v2.new(link_size, 0),
 
-      update: function(){
-        body.position.add(body.velocity);
-        draw();
+        update: function(){
+          head.position.add(head.velocity);
+          draw();
+        },
+
+        links: [],
+        add_boyd_link: function(){}
       }
-    }
 
-    function draw() {
-      body.ctx.beginPath();
-      body.ctx.rect(body.position.x, body.position.y, link_size, link_size);
-      body.ctx.fill();
-      body.ctx.closePath();
-    }
+      function body_link(x, y, duration){
+        return {
+          position: engine.v2.new(x, y),
+          duration: duration
+        }
+      }
 
-    return body;
+      function draw() {
+        head.ctx.beginPath();
+        head.ctx.rect(head.position.x, head.position.y, link_size, link_size);
+        head.ctx.fill();
+        head.ctx.closePath();
+      }
+
+      return head;
+    }
 });
