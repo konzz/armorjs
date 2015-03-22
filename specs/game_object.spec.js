@@ -18,7 +18,7 @@ define(['engine/game_object'], function(_object){
     describe('update', function(){
       it('should call update on each component', function(){
         spyOn(component, 'update');
-        object.add_component('test_component', component);
+        object.addComponent('test_component', component);
         object.update();
         expect(component.update).toHaveBeenCalled();
       });
@@ -28,7 +28,7 @@ define(['engine/game_object'], function(_object){
 
       it('should save the ctx and set it to all the components', function(){
         var ctx = {};
-        object.add_component('test_component', component);
+        object.addComponent('test_component', component);
         object.setCtx(ctx);
         expect(object.ctx).toBe(ctx);
         expect(component.ctx).toBe(ctx);
@@ -41,12 +41,12 @@ define(['engine/game_object'], function(_object){
     });
 
     it('should accept components', function(){
-      object.add_component('test_component', component);
+      object.addComponent('test_component', component);
       expect(object.components.test_component).toBe(component);
     });
 
     it('should set itself as object reference in components', function(){
-      object.add_component('test_component', component);
+      object.addComponent('test_component', component);
       expect(component.object).toBe(object);
     });
 

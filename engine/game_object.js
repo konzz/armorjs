@@ -11,7 +11,7 @@ define(['underscore'], function(_){
 
       position: {x: 0, y:0},
 
-      add_component: function(key, component) {
+      addComponent: function(key, component) {
         component.object = this;
         this.components[key] = component;
       },
