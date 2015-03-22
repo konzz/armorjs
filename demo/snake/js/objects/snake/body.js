@@ -1,36 +1,58 @@
 'use strict';
 
 define(['engine/engine'], function(engine){
-    return function(){
-      var link_size = 10;
-      var head = {
 
-        position: engine.v2.new(25, 25),
-        velocity: engine.v2.new(link_size, 0),
+  return function(){
+    
+    var linkSize = 10;
+    var lastMovement = Date.now();
+    
+    var velocities = {
+      up: engine.v2.new(0, -linkSize),
+      down: engine.v2.new(0, linkSize),
+      left: engine.v2.new(-linkSize, 0),
+      right: engine.v2.new(linkSize, 0)
+    };
 
-        update: function(){
-          head.position.add(head.velocity);
-          draw();
-        },
+    var head = {
 
-        links: [],
-        add_boyd_link: function(){}
-      }
+      position: engine.v2.new(25, 25),
+      size: linkSize,
+      direction: 'right',
+      moveRate: 500,
 
-      function body_link(x, y, duration){
-        return {
-          position: engine.v2.new(x, y),
-          duration: duration
+      update: function(){
+        if(lastMovement + head.moveRate <= Date.now()){
+          move();
         }
-      }
+        drawLink(head);
+      },
 
-      function draw() {
-        head.ctx.beginPath();
-        head.ctx.rect(head.position.x, head.position.y, link_size, link_size);
-        head.ctx.fill();
-        head.ctx.closePath();
-      }
+      links: [],
 
-      return head;
+      addLink: function(){}
     }
+
+    function move(){
+      head.position.add(velocities[head.direction]);
+      lastMovement =  Date.now();
+    }
+
+    function bodyLink(x, y, duration){
+      return {
+        position: engine.v2.new(x, y),
+        duration: duration,
+        size: linkSize
+      }
+    }
+
+    function drawLink(link) {
+      head.ctx.beginPath();
+      head.ctx.rect(link.position.x, link.position.y, link.size, link.size);
+      head.ctx.fill();
+      head.ctx.closePath();
+    }
+
+    return head;
+  }
 });
