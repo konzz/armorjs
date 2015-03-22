@@ -1,7 +1,7 @@
 {
-  "name": "2DGameEngine",
+  "name": "ArmorJS",
   "version": "1.0.0",
-  "descrition": "2DGameEngine",
+  "descrition": "An structure for game development in JS",
   "dependencies": {
     "bower": "1.3.9"
   },
