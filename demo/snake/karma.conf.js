@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'demo/snake/test-main.js',
-      {pattern: 'demo/snake/js/**/*', included: false},
+      {pattern: 'demo/snake/**/*', included: false},
       {pattern: 'demo/snake/specs/**/*', included: false},
       {pattern: 'engine/*.js', included: false},
       {pattern: 'bower_components/jquery/dist/jquery.js', included: false},

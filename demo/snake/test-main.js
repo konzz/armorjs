@@ -19,8 +19,8 @@ require.config({
     'underscore': 'bower_components/underscore/underscore',
     'jquery': 'bower_components/jquery/dist/jquery',
     'engine': 'engine',
-    'levels': 'demo/snake/js/levels',
-    'objects': 'demo/snake/js/objects'
+    'levels': 'demo/snake/levels',
+    'objects': 'demo/snake/objects'
   },
   // dynamically load all test files
   deps: allTestFiles,
