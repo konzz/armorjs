@@ -21,7 +21,7 @@ define(['engine/engine'], function(engine){
 
     describe('addGameObject', function(){
       it('should add the game to the list', function(){
-        var bullet = engine.game_object('bullet');
+        var bullet = engine.gameObject('bullet');
         level.addGameObject(bullet);
         expect(level.objects[0]).toBe(bullet);
       });
@@ -30,7 +30,7 @@ define(['engine/engine'], function(engine){
     describe('setCanvas', function(){
 
       it('should store the canvas and set the context to all the game objects', function(){
-        var bullet = engine.game_object('bullet');
+        var bullet = engine.gameObject('bullet');
         level.addGameObject(bullet);
         var canvas = $('<canvas id="game_canvas"></canvas>')[0];
         level.setCanvas(canvas);
@@ -47,9 +47,9 @@ define(['engine/engine'], function(engine){
         level.setCanvas(canvas);
       });
 
-      it('should call update on each game_object', function(){
+      it('should call update on each gameObject', function(){
 
-        var gameObject = engine.game_object('game_object');
+        var gameObject = engine.gameObject('gameObject');
         level.addGameObject(gameObject);
 
         spyOn(gameObject, 'update');
@@ -60,6 +60,20 @@ define(['engine/engine'], function(engine){
         level_update_method();
 
         expect(gameObject.update).toHaveBeenCalled();
+      });
+
+      it('should initialize each gameObject', function(){
+
+        var gameObject = engine.gameObject('gameObject');
+        level.addGameObject(gameObject);
+
+        spyOn(gameObject, 'init');
+
+        expect(gameObject.init).not.toHaveBeenCalled();
+
+        level.play();
+
+        expect(gameObject.init).toHaveBeenCalled();
       });
 
       it('should clear the canvas on each step', function(){
@@ -76,11 +90,11 @@ define(['engine/engine'], function(engine){
     });
 
     describe('when stoping the level', function(){
-      it('should stop calling update on each game_object', function(){
+      it('should stop calling update on each gameObject', function(){
         var canvas = $('<canvas id="game_canvas"></canvas>')[0];
         level.setCanvas(canvas);
 
-        var gameObject = engine.game_object('game_object');
+        var gameObject = engine.gameObject('gameObject');
         level.addGameObject(gameObject);
 
         spyOn(gameObject, 'update');

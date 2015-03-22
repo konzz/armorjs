@@ -8,6 +8,7 @@ define(['underscore', 'engine/time'], function(_, time){
 
       play: function(){
         this.active = true;
+        initializeGameObjects();
       },
 
       stop: function(){
@@ -28,6 +29,12 @@ define(['underscore', 'engine/time'], function(_, time){
 
       active: false
     };
+
+    function initializeGameObjects(){
+      _(level.objects).each(function(object){
+        object.init();
+      });
+    }
 
     time.onStep(function(){
       if(!level.active) {

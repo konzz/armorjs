@@ -1,6 +1,6 @@
 'use strict';
 
-define(['engine/game_object'], function(_object){
+define(['engine/gameObject'], function(_object){
   describe('object module', function(){
 
     var object;
@@ -8,7 +8,7 @@ define(['engine/game_object'], function(_object){
 
     beforeEach(function(){
       object = _object('test_object');
-      component = {active: true, update: function(){}};
+      component = {active: true, update: function(){}, init: function(){}};
     });
 
     it('should have a name', function(){
@@ -22,6 +22,25 @@ define(['engine/game_object'], function(_object){
         object.update();
         expect(component.update).toHaveBeenCalled();
       });
+
+      it('should not throw errors if the component does not have update method', function(){
+        object.addComponent('not_update_component', {});
+        object.update();
+      });
+    });
+
+    describe('init', function(){
+      it('should call init on each component', function(){
+        spyOn(component, 'init');
+        object.addComponent('test_component', component);
+        object.init();
+        expect(component.init).toHaveBeenCalled();
+      });
+
+      it('should not throw errors if the component does not have init method', function(){
+        object.addComponent('not_init_component', {});
+        object.init();
+      })
     });
 
     describe('setCtx', function(){

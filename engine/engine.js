@@ -1,11 +1,11 @@
 'use strict';
 
-define(['./game', './level', './game_object', './time', './vector2'],
-function(game, level, game_object, time, v2){
+define(['./game', './level', './gameObject', './time', './vector2'],
+function(game, level, gameObject, time, v2){
   return {
     game: game,
     level: level,
-    game_object: game_object,
+    gameObject: gameObject,
     time: time,
     v2: v2
   };

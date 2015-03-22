@@ -23,9 +23,19 @@ define(['underscore'], function(_){
         });
       },
 
+      init: function(){
+        _(this.components).each(function(component){
+          if(component.init){
+            component.init();
+          }
+        });
+      },
+
       update: function(){
         _(this.components).each(function(component){
-          component.update();
+          if(component.update){
+            component.update();
+          }
         });
       }
     };
