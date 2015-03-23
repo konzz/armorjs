@@ -3,7 +3,7 @@
 define(['underscore'], function(_){
   return function(name){
 
-    var game_object = {
+    var gameObject = {
 
       name: name,
 
@@ -40,6 +40,6 @@ define(['underscore'], function(_){
       }
     };
 
-    return game_object;
+    return gameObject;
   };
 });
