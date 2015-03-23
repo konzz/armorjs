@@ -1,16 +1,17 @@
 'use strict';
 
-define(['engine/engine'], function(engine){
+define(['engine/engine', 'jquery'], function(engine, $){
 
   return function(){
     
     var width = 10;
     var height = 10;
     var lastMovement = Date.now();
+    var directions = ['up', 'right', 'down', 'left'];
     
     var velocities = {
-      up: engine.v2.new(0, -width),
-      down: engine.v2.new(0, width),
+      up: engine.v2.new(0, -height),
+      down: engine.v2.new(0, height),
       left: engine.v2.new(-width, 0),
       right: engine.v2.new(width, 0)
     };
@@ -30,9 +31,20 @@ define(['engine/engine'], function(engine){
         drawLink(head);
       },
 
-      links: [],
+      turnRight: function(direction){
+        var currentDirectionIndex = directions.indexOf(head.direction);
 
-      addLink: function(){}
+        if(currentDirectionIndex === 3) currentDirectionIndex = -1;
+        
+        head.direction = directions[currentDirectionIndex + 1];
+      },
+
+      turnLeft: function(){
+        var currentDirectionIndex = directions.indexOf(head.direction);
+
+        if(currentDirectionIndex === 0) currentDirectionIndex = 4;
+          head.direction = directions[currentDirectionIndex - 1];
+      }
     }
 
     function move(){

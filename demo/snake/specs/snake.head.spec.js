@@ -44,5 +44,32 @@ define(['objects/snake/head', 'engine/engine', 'engine/mocks'], function(head, e
       });
     });
 
+    describe('turnLeft()', function(){
+      it('should change the snake head direction to the left', function(){
+        expect(snakeHead.direction).toBe('right');
+        snakeHead.turnLeft();
+        expect(snakeHead.direction).toBe('up');
+        snakeHead.turnLeft();
+        expect(snakeHead.direction).toBe('left');
+        snakeHead.turnLeft();
+        expect(snakeHead.direction).toBe('down');
+        snakeHead.turnLeft();
+        expect(snakeHead.direction).toBe('right');
+      });
+    });
+
+    describe('turnRight()', function(){
+      it('should change the snake head direction to the left', function(){
+        expect(snakeHead.direction).toBe('right');
+        snakeHead.turnRight();
+        expect(snakeHead.direction).toBe('down');
+        snakeHead.turnRight();
+        expect(snakeHead.direction).toBe('left');
+        snakeHead.turnRight();
+        expect(snakeHead.direction).toBe('up');
+        snakeHead.turnRight();
+        expect(snakeHead.direction).toBe('right');
+      });
+    });
   });
 });

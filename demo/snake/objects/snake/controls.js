@@ -5,16 +5,9 @@ define(['keypress'], function(keypress){
     init: function(){
 
       var listener = new keypress.Listener();
-
-      listener.simple_combo('w', move.bind(controls, 'up'))
-      listener.simple_combo('a', move.bind(controls, 'left'))
-      listener.simple_combo('s', move.bind(controls, 'down'))
-      listener.simple_combo('d', move.bind(controls, 'right'))
+      listener.simple_combo('a', this.gameObject.components.head.turnLeft)
+      listener.simple_combo('d', this.gameObject.components.head.turnRight)
     }
-  }
-
-  function move(direction){
-    this.gameObject.components.head.direction = direction;
   }
 
   return controls;
