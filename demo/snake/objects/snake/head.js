@@ -49,8 +49,10 @@ define(['engine/engine'], function(engine){
     function drawLink(link) {
       head.ctx.beginPath();
       head.ctx.rect(link.position.x, link.position.y, link.size, link.size);
+      head.ctx.fillStyle = "#25ACE3";
       head.ctx.fill();
       head.ctx.closePath();
+      head.ctx.stroke();
     }
 
     return head;

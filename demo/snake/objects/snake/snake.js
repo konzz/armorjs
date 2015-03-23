@@ -1,9 +1,10 @@
 'use strict';
 
-define(['engine/engine', './body'], function(engine, body){
+define(['engine/engine', './head', './controls'], function(engine, head, controls){
   var snake = engine.gameObject('snake');
 
-  snake.addComponent('body', body());
+  snake.addComponent('head', head());
+  snake.addComponent('controls', controls);
 
   return snake;
 });
