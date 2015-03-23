@@ -4,20 +4,22 @@ define(['engine/engine'], function(engine){
 
   return function(){
     
-    var linkSize = 10;
+    var width = 10;
+    var height = 10;
     var lastMovement = Date.now();
     
     var velocities = {
-      up: engine.v2.new(0, -linkSize),
-      down: engine.v2.new(0, linkSize),
-      left: engine.v2.new(-linkSize, 0),
-      right: engine.v2.new(linkSize, 0)
+      up: engine.v2.new(0, -width),
+      down: engine.v2.new(0, width),
+      left: engine.v2.new(-width, 0),
+      right: engine.v2.new(width, 0)
     };
 
     var head = {
 
       position: engine.v2.new(25, 25),
-      size: linkSize,
+      width: width,
+      height: height,
       direction: 'right',
       moveRate: 500,
 
@@ -48,7 +50,7 @@ define(['engine/engine'], function(engine){
 
     function drawLink(link) {
       head.ctx.beginPath();
-      head.ctx.rect(link.position.x, link.position.y, link.size, link.size);
+      head.ctx.rect(link.position.x, link.position.y, link.width, link.height);
       head.ctx.fillStyle = "#25ACE3";
       head.ctx.fill();
       head.ctx.closePath();

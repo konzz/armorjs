@@ -20,8 +20,8 @@ define(['objects/snake/head', 'engine/engine', 'engine/mocks'], function(head, e
         .toHaveBeenCalledWith(
           snakeHead.position.x,
           snakeHead.position.y,
-          snakeHead.size,
-          snakeHead.size
+          snakeHead.width,
+          snakeHead.height
         );
       });
 
