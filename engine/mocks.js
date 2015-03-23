@@ -6,7 +6,8 @@ define(function(_){
       beginPath: function(){},
       rect: function(){},
       fill: function(){},
-      closePath: function(){}
+      closePath: function(){},
+      stroke: function(){}
     }
   }
 });
