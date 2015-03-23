@@ -15,6 +15,18 @@ define(['engine/gameObject'], function(_object){
       expect(object.name).toBe('test_object');
     });
 
+    describe('addComponent()', function(){
+      it('should add the component to components', function(){
+      object.addComponent('test_component', component);
+      expect(object.components.test_component).toBe(component);
+    });
+
+    it('should set itself as object reference in components', function(){
+      object.addComponent('test_component', component);
+      expect(component.gameObject).toBe(object);
+    });
+  });
+
     describe('update', function(){
       it('should call update on each component', function(){
         spyOn(component, 'update');
@@ -53,21 +65,5 @@ define(['engine/gameObject'], function(_object){
         expect(component.ctx).toBe(ctx);
       });
     });
-
-    it('should have a position', function(){
-      expect(object.position.x).toBe(0);
-      expect(object.position.y).toBe(0);
-    });
-
-    it('should accept components', function(){
-      object.addComponent('test_component', component);
-      expect(object.components.test_component).toBe(component);
-    });
-
-    it('should set itself as object reference in components', function(){
-      object.addComponent('test_component', component);
-      expect(component.object).toBe(object);
-    });
-
   });
 });

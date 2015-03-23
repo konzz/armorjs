@@ -14,7 +14,7 @@ define(['keypress'], function(keypress){
   }
 
   function move(direction){
-    this.object.components.head.direction = direction;
+    this.gameObject.components.head.direction = direction;
   }
 
   return controls;
