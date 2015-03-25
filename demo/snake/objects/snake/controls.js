@@ -1,12 +1,10 @@
 'use strict';
 
-define(['keypress'], function(keypress){
+define(['mousetrap'], function(mousetrap){
   var controls = {
     init: function(){
-
-      var listener = new keypress.Listener();
-      listener.simple_combo('a', this.gameObject.components.head.turnLeft)
-      listener.simple_combo('d', this.gameObject.components.head.turnRight)
+      mousetrap.bind('a', controls.gameObject.components.head.turnLeft);
+      mousetrap.bind('d', controls.gameObject.components.head.turnRight);
     }
   }
 
