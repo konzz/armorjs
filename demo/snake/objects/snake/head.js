@@ -53,14 +53,6 @@ define(['engine/engine', 'jquery'], function(engine, $){
       lastMovement =  Date.now();
     }
 
-    function bodyLink(x, y, duration){
-      return {
-        position: engine.v2.new(x, y),
-        duration: duration,
-        size: linkSize
-      }
-    }
-
     function drawLink(link) {
       head.ctx.beginPath();
       head.ctx.rect(link.position.x, link.position.y, link.width, link.height);
