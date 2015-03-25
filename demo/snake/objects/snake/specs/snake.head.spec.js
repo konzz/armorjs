@@ -1,6 +1,6 @@
 'use strict';
 
-define(['objects/snake/head', 'engine/engine', 'engine/mocks'], function(head, engine, mocks){
+define(['../head', 'engine/engine', 'engine/mocks'], function(head, engine, mocks){
   describe('snake head', function(){
 
     var snakeHead;

@@ -43,7 +43,8 @@ define(['engine/engine', 'jquery'], function(engine, $){
         var currentDirectionIndex = directions.indexOf(head.direction);
 
         if(currentDirectionIndex === 0) currentDirectionIndex = 4;
-          head.direction = directions[currentDirectionIndex - 1];
+        
+        head.direction = directions[currentDirectionIndex - 1];
       }
     }
 
