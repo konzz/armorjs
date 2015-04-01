@@ -8,7 +8,7 @@ define(['engine/gameObject'], function(_object){
 
     beforeEach(function(){
       object = _object('test_object');
-      component = {active: true, update: function(){}, init: function(){}};
+      component = {update: function(){}, init: function(){}};
     });
 
     it('should have a name', function(){
@@ -17,15 +17,24 @@ define(['engine/gameObject'], function(_object){
 
     describe('addComponent()', function(){
       it('should add the component to components', function(){
-      object.addComponent('test_component', component);
-      expect(object.components.test_component).toBe(component);
-    });
+        object.addComponent('test_component', component);
+        expect(object.components.test_component).toBe(component);
+      });
 
-    it('should set itself as object reference in components', function(){
-      object.addComponent('test_component', component);
-      expect(component.gameObject).toBe(object);
+      it('should set itself as object reference in components', function(){
+        object.addComponent('test_component', component);
+        expect(component.gameObject).toBe(object);
+      });
+
+      it('should add a method to find other components', function(){
+        object.addComponent('test_component', component);
+        
+        var other_component = {};
+        object.addComponent('other_component', other_component);
+
+        expect(component.getComponent('other_component')).toBe(other_component);
+      })
     });
-  });
 
     describe('update', function(){
       it('should call update on each component', function(){

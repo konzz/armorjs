@@ -11,6 +11,7 @@ define(['underscore'], function(_){
 
       addComponent: function(key, component) {
         component.gameObject = this;
+        component.getComponent = getComponent;
         this.components[key] = component;
       },
 
@@ -37,6 +38,10 @@ define(['underscore'], function(_){
         });
       }
     };
+
+    function getComponent(name){
+      return gameObject.components[name];
+    }
 
     return gameObject;
   };
