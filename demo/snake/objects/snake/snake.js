@@ -1,10 +1,14 @@
 'use strict';
 
-define(['engine/engine', './head', './controls'], function(engine, head, controls){
-  var snake = engine.gameObject('snake');
+define(['engine/engine', './head', './body', './controls'],
+function(engine, head, body, controls){
+  return function(){
+    var snake = engine.gameObject('snake');
 
-  snake.addComponent('head', head());
-  snake.addComponent('controls', controls);
+    snake.addComponent('head', head());
+    snake.addComponent('body', body());
+    snake.addComponent('controls', controls);
 
-  return snake;
+    return snake;
+  }
 });

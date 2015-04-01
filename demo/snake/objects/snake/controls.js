@@ -3,8 +3,8 @@
 define(['mousetrap'], function(mousetrap){
   var controls = {
     init: function(){
-      mousetrap.bind('a', controls.gameObject.components.head.turnLeft);
-      mousetrap.bind('d', controls.gameObject.components.head.turnRight);
+      mousetrap.bind('a', controls.getComponent('head').turnLeft);
+      mousetrap.bind('d', controls.getComponent('head').turnRight);
     }
   }
 

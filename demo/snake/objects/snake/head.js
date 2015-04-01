@@ -6,6 +6,8 @@ define(['engine/engine', 'jquery'], function(engine, $){
     
     var width = 10;
     var height = 10;
+
+    var canTurn = true;
     var lastMovement = Date.now();
     var directions = ['up', 'right', 'down', 'left'];
     
@@ -22,40 +24,50 @@ define(['engine/engine', 'jquery'], function(engine, $){
       width: width,
       height: height,
       direction: 'right',
-      moveRate: 500,
+      moveRate: 100,
 
       update: function(){
         if(lastMovement + head.moveRate <= Date.now()){
+          head.gameObject.components.body.updatePosition();
+          
+          if(head.gameObject.components.body.links.length < 50){
+            var pos = engine.v2.new(25, 25);
+            head.gameObject.components.body.addLink(pos);
+          }
+
           move();
         }
-        drawLink(head);
+        draw();
       },
 
       turnRight: function(direction){
-        var currentDirectionIndex = directions.indexOf(head.direction);
-
-        if(currentDirectionIndex === 3) currentDirectionIndex = -1;
-        
-        head.direction = directions[currentDirectionIndex + 1];
+        if(canTurn){
+          head.direction = directions[directionIndex() + 1] || directions[0];
+          canTurn = false;
+        }
       },
 
       turnLeft: function(){
-        var currentDirectionIndex = directions.indexOf(head.direction);
-
-        if(currentDirectionIndex === 0) currentDirectionIndex = 4;
-        
-        head.direction = directions[currentDirectionIndex - 1];
+        if(canTurn){
+          head.direction = directions[directionIndex() - 1] || directions[3];
+          canTurn = false;
+        }
       }
+    }
+
+    function directionIndex(){
+      return directions.indexOf(head.direction);
     }
 
     function move(){
       head.position.add(velocities[head.direction]);
       lastMovement =  Date.now();
+      canTurn = true;
     }
 
-    function drawLink(link) {
+    function draw() {
       head.ctx.beginPath();
-      head.ctx.rect(link.position.x, link.position.y, link.width, link.height);
+      head.ctx.rect(head.position.x, head.position.y, head.width, head.height);
       head.ctx.fillStyle = "#25ACE3";
       head.ctx.fill();
       head.ctx.closePath();
