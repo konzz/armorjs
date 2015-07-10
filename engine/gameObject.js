@@ -1,6 +1,5 @@
-'use strict';
-
-define(['underscore'], function(_){
+define(['underscore', 'engine/vector2'], function(_, v2){
+  'use strict';
   return function(name){
 
     var gameObject = {
@@ -8,6 +7,8 @@ define(['underscore'], function(_){
       name: name,
 
       components: {},
+
+      position: v2.new(0,0),
 
       addComponent: function(key, component) {
         component.gameObject = this;

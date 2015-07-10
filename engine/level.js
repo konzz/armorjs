@@ -16,6 +16,7 @@ define(['underscore', 'engine/time'], function(_, time){
       },
 
       addGameObject: function(object){
+        object.search = search;
         level.objects.push(object);
       },
 
@@ -29,6 +30,10 @@ define(['underscore', 'engine/time'], function(_, time){
 
       active: false
     };
+
+    function search(name){
+      return _(level.objects).where({name: name});
+    }
 
     function initializeGameObjects(){
       _(level.objects).each(function(object){

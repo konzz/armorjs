@@ -1,7 +1,5 @@
-'use strict';
-
-
 define(['engine/time'],function(time){
+  'use strict';
   return function(canvas_id){
 
     var canvas = document.getElementById(canvas_id);
