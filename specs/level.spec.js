@@ -25,6 +25,15 @@ define(['engine/engine'], function(engine){
         level.addGameObject(bullet);
         expect(level.objects[0]).toBe(bullet);
       });
+
+      it('should set a method to search other gameObjects', function(){
+        var bullet = engine.gameObject('bullet');
+        var head = engine.gameObject('head');
+        level.addGameObject(bullet);
+        level.addGameObject(head);
+        
+        expect(bullet.search('head')[0]).toBe(head);
+      })
     });
 
     describe('setCanvas', function(){

@@ -1,16 +1,14 @@
-'use strict';
-
 define(['engine/engine', 'jquery'], function(engine, $){
-
+  'use strict';
   return function(){
-    
+
     var width = 10;
     var height = 10;
 
     var canTurn = true;
     var lastMovement = Date.now();
     var directions = ['up', 'right', 'down', 'left'];
-    
+
     var velocities = {
       up: engine.v2.new(0, -height),
       down: engine.v2.new(0, height),
@@ -20,7 +18,6 @@ define(['engine/engine', 'jquery'], function(engine, $){
 
     var head = {
 
-      position: engine.v2.new(25, 25),
       width: width,
       height: height,
       direction: 'right',
@@ -29,9 +26,9 @@ define(['engine/engine', 'jquery'], function(engine, $){
       update: function(){
         if(lastMovement + head.moveRate <= Date.now()){
           head.gameObject.components.body.updatePosition();
-          
-          if(head.gameObject.components.body.links.length < 50){
-            var pos = engine.v2.new(25, 25);
+
+          if(head.gameObject.components.body.links.length < 10){
+            var pos = engine.v2.new(0, 0);
             head.gameObject.components.body.addLink(pos);
           }
 
@@ -53,27 +50,29 @@ define(['engine/engine', 'jquery'], function(engine, $){
           canTurn = false;
         }
       }
-    }
+    };
 
     function directionIndex(){
       return directions.indexOf(head.direction);
     }
 
     function move(){
-      head.position.add(velocities[head.direction]);
+      var position = head.gameObject.position;
+      position.add(velocities[head.direction]);
       lastMovement =  Date.now();
       canTurn = true;
     }
 
     function draw() {
+      var position = head.gameObject.position;
       head.ctx.beginPath();
-      head.ctx.rect(head.position.x, head.position.y, head.width, head.height);
-      head.ctx.fillStyle = "#25ACE3";
+      head.ctx.rect(position.x, position.y, head.width, head.height);
+      head.ctx.fillStyle = "#DB303C";
       head.ctx.fill();
       head.ctx.closePath();
       head.ctx.stroke();
     }
 
     return head;
-  }
+  };
 });

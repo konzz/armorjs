@@ -1,14 +1,12 @@
-'use strict';
-
 define(['engine/engine', 'underscore'], function(engine, _){
-
+  'use strict';
   return function(){
-    
+
     var width = 10;
     var height = 10;
 
     var body = {
-      
+
       links: [],
       linksWidth: width,
       linksHeight: height,
@@ -21,12 +19,12 @@ define(['engine/engine', 'underscore'], function(engine, _){
         body.links.reverse();
 
         _(body.links).each(function(link, index){
-          
+          var position = body.gameObject.position;
           if((index+1) === body.links.length){
-            link.position.x = body.getComponent('head').position.x;
-            link.position.y = body.getComponent('head').position.y;
+            link.position.x = position.x;
+            link.position.y = position.y;
             return;
-          };
+          }
 
           link.position.x = body.links[index+1].position.x;
           link.position.y = body.links[index+1].position.y;
@@ -40,7 +38,7 @@ define(['engine/engine', 'underscore'], function(engine, _){
           position: v2
         });
       }
-    }
+    };
 
     function drawLink(link) {
       body.ctx.beginPath();
@@ -52,5 +50,5 @@ define(['engine/engine', 'underscore'], function(engine, _){
     }
 
     return body;
-  }
+  };
 });

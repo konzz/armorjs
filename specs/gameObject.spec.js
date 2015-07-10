@@ -1,6 +1,5 @@
-'use strict';
-
 define(['engine/gameObject'], function(_object){
+  'use strict';
   describe('object module', function(){
 
     var object;
@@ -13,6 +12,11 @@ define(['engine/gameObject'], function(_object){
 
     it('should have a name', function(){
       expect(object.name).toBe('test_object');
+    });
+
+    it('should have a v2 position', function(){
+      expect(object.position.x).toBe(0);
+      expect(object.position.y).toBe(0);
     });
 
     describe('addComponent()', function(){
@@ -28,7 +32,7 @@ define(['engine/gameObject'], function(_object){
 
       it('should add a method to find other components', function(){
         object.addComponent('test_component', component);
-        
+
         var other_component = {};
         object.addComponent('other_component', other_component);
 
