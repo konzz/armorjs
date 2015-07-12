@@ -1,4 +1,4 @@
-define(['engine/gameObject'], function(_object){
+define(['engine/gameObject'], function(gameObject){
   'use strict';
   describe('object module', function(){
 
@@ -6,7 +6,7 @@ define(['engine/gameObject'], function(_object){
     var component;
 
     beforeEach(function(){
-      object = _object('test_object');
+      object = gameObject('test_object');
       component = {update: function(){}, init: function(){}};
     });
 
@@ -17,6 +17,11 @@ define(['engine/gameObject'], function(_object){
     it('should have a v2 position', function(){
       expect(object.position.x).toBe(0);
       expect(object.position.y).toBe(0);
+    });
+
+    it('accepts an object to extend properties', function(){
+      object = gameObject('name', {position: 'some position'});
+      expect(object.position).toBe('some position');
     });
 
     describe('addComponent()', function(){

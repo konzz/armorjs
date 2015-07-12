@@ -1,6 +1,6 @@
 define(['underscore', 'engine/vector2'], function(_, v2){
   'use strict';
-  return function(name){
+  return function(name, options){
 
     var gameObject = {
 
@@ -43,7 +43,7 @@ define(['underscore', 'engine/vector2'], function(_, v2){
     function getComponent(name){
       return gameObject.components[name];
     }
-
-    return gameObject;
+    
+    return _.extend(gameObject, options);
   };
 });
