@@ -10,6 +10,10 @@ define(['underscore', 'engine/vector2'], function(_, v2){
 
       position: v2.new(0,0),
 
+      width: 10,
+
+      height: 10,
+
       addComponent: function(key, component) {
         component.gameObject = this;
         component.getComponent = getComponent;
@@ -43,7 +47,7 @@ define(['underscore', 'engine/vector2'], function(_, v2){
     function getComponent(name){
       return gameObject.components[name];
     }
-    
+
     return _.extend(gameObject, options);
   };
 });

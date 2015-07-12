@@ -19,6 +19,11 @@ define(['engine/gameObject'], function(gameObject){
       expect(object.position.y).toBe(0);
     });
 
+    it('should have a width and a height', function(){
+      expect(object.width).toBe(10);
+      expect(object.height).toBe(10);
+    });
+
     it('accepts an object to extend properties', function(){
       object = gameObject('name', {position: 'some position'});
       expect(object.position).toBe('some position');
