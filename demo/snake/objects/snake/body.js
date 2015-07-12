@@ -2,14 +2,9 @@ define(['engine/engine', 'underscore'], function(engine, _){
   'use strict';
   return function(){
 
-    var width = 10;
-    var height = 10;
-
     var body = {
 
       links: [],
-      linksWidth: width,
-      linksHeight: height,
 
       update: function(){
         _(body.links).each(drawLink);
@@ -42,7 +37,7 @@ define(['engine/engine', 'underscore'], function(engine, _){
 
     function drawLink(link) {
       body.ctx.beginPath();
-      body.ctx.rect(link.position.x, link.position.y, body.linksWidth, body.linksHeight);
+      body.ctx.rect(link.position.x, link.position.y, body.gameObject.width, body.gameObject.height);
       body.ctx.fillStyle = "#25ACE3";
       body.ctx.fill();
       body.ctx.closePath();

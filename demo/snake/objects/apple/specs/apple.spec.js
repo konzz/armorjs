@@ -1,7 +1,7 @@
 define(['../consumable','engine/engine', 'engine/mocks'], function(consumableFactory, engine, mocks){
   'use strict';
 
-  describe('consumable', function(){
+  describe('apple', function(){
 
     var gameObject;
     beforeEach(function(){
@@ -15,9 +15,9 @@ define(['../consumable','engine/engine', 'engine/mocks'], function(consumableFac
 
     describe('when in the same position as the snake head', function(){
       it('will call eaten in the component', function(){
-        var pie = engine.gameObject('pie');
+        var apple = engine.gameObject('apple');
         var consumable = consumableFactory();
-        pie.addComponent('consumable', consumable);
+        apple.addComponent('consumable', consumable);
       });
     });
 

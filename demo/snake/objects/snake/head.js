@@ -2,25 +2,10 @@ define(['engine/engine', 'jquery'], function(engine, $){
   'use strict';
   return function(){
 
-    var width = 10;
-    var height = 10;
-
     var canTurn = true;
     var lastMovement = Date.now();
-    var directions = ['up', 'right', 'down', 'left'];
-
-    var velocities = {
-      up: engine.v2.new(0, -height),
-      down: engine.v2.new(0, height),
-      left: engine.v2.new(-width, 0),
-      right: engine.v2.new(width, 0)
-    };
 
     var head = {
-
-      width: width,
-      height: height,
-      direction: 'right',
       moveRate: 100,
 
       update: function(){
@@ -38,17 +23,17 @@ define(['engine/engine', 'jquery'], function(engine, $){
       },
 
       turnRight: function(direction){
-        if(canTurn){
-          head.direction = directions[directionIndex() + 1] || directions[0];
-          canTurn = false;
-        }
+        var x = head.velocity.x;
+        var y = head.velocity.y * - 1;
+        head.velocity.x = y;
+        head.velocity.y = x;
       },
 
       turnLeft: function(){
-        if(canTurn){
-          head.direction = directions[directionIndex() - 1] || directions[3];
-          canTurn = false;
-        }
+        var x = head.velocity.x * - 1;
+        var y = head.velocity.y;
+        head.velocity.x = y;
+        head.velocity.y = x;
       }
     };
 
@@ -57,8 +42,12 @@ define(['engine/engine', 'jquery'], function(engine, $){
     }
 
     function move(){
+      if(!head.velocity){
+        head.velocity = engine.v2.new(head.gameObject.width, 0);
+      }
+
       var position = head.gameObject.position;
-      position.add(velocities[head.direction]);
+      position.add(head.velocity);
       lastMovement =  Date.now();
       canTurn = true;
     }
@@ -66,7 +55,7 @@ define(['engine/engine', 'jquery'], function(engine, $){
     function draw() {
       var position = head.gameObject.position;
       head.ctx.beginPath();
-      head.ctx.rect(position.x, position.y, head.width, head.height);
+      head.ctx.rect(position.x, position.y, head.gameObject.width, head.gameObject.height);
       head.ctx.fillStyle = "#DB303C";
       head.ctx.fill();
       head.ctx.closePath();
