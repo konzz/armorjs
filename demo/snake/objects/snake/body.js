@@ -5,6 +5,7 @@ define(['engine/engine', 'underscore'], function(engine, _){
     var body = {
 
       links: [],
+      color: "#25ACE3",
 
       update: function(){
         _(body.links).each(drawLink);
@@ -38,7 +39,7 @@ define(['engine/engine', 'underscore'], function(engine, _){
     function drawLink(link) {
       body.ctx.beginPath();
       body.ctx.rect(link.position.x, link.position.y, body.gameObject.width, body.gameObject.height);
-      body.ctx.fillStyle = "#25ACE3";
+      body.ctx.fillStyle = body.color;
       body.ctx.fill();
       body.ctx.closePath();
       body.ctx.stroke();

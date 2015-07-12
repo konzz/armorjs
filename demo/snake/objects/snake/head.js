@@ -7,6 +7,7 @@ define(['engine/engine', 'jquery'], function(engine, $){
 
     var head = {
       moveRate: 100,
+      color: "#DB303C",
 
       update: function(){
         if(lastMovement + head.moveRate <= Date.now()){
@@ -56,7 +57,7 @@ define(['engine/engine', 'jquery'], function(engine, $){
       var position = head.gameObject.position;
       head.ctx.beginPath();
       head.ctx.rect(position.x, position.y, head.gameObject.width, head.gameObject.height);
-      head.ctx.fillStyle = "#DB303C";
+      head.ctx.fillStyle = head.color;
       head.ctx.fill();
       head.ctx.closePath();
       head.ctx.stroke();
