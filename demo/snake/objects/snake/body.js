@@ -29,9 +29,9 @@ define(['engine/engine', 'underscore'], function(engine, _){
         body.links.reverse();
       },
 
-      addLink: function(v2){
-        this.links.push({
-          position: v2
+      addLink: function(){
+        body.links.push({
+          position: engine.v2.new(-10,-10)
         });
       }
     };

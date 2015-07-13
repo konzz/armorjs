@@ -1,23 +1,27 @@
-define(['../consumable','engine/engine', 'engine/mocks'], function(consumableFactory, engine, mocks){
+define(['../apple','engine/engine', 'engine/mocks'], function(appleComponent, engine, mocks){
   'use strict';
 
   describe('apple', function(){
 
-    var gameObject;
+    var appleObject;
+    var level;
     beforeEach(function(){
-      var level = engine.level('test_level');
+      level = engine.level('test_level');
 
-      snake = engine.gameObject('snake');
-      snake.addComponent('head', {position: {x: 0, y: 0}});
+      var snake = engine.gameObject('snake', {position: {x: 0, y: 0}});
+      appleObject = engine.gameObject('apple', {position: {x: 0, y: 0}});
 
-      level.addGameObject();
+      level.addGameObject(snake);
+      level.play();
     });
 
     describe('when in the same position as the snake head', function(){
       it('will call eaten in the component', function(){
-        var apple = engine.gameObject('apple');
-        var consumable = consumableFactory();
-        apple.addComponent('consumable', consumable);
+
+        var apple = appleComponent();
+        spyOn(apple, 'eaten');
+        appleObject.addComponent('consumable', apple);
+        expect(apple.eaten).toHaveBeenCalled();
       });
     });
 

@@ -1,15 +1,16 @@
-'use strict';
-
 define(['../snake', 'engine/engine', 'engine/mocks'], function(snake, engine, mocks){
+  'use strict';
   describe('snake head', function(){
 
     var snakeHead;
     var timeSpy;
+    var snakeObject;
     beforeEach(function(){
+      snakeObject = snake(25,10);
       timeSpy = spyOn(Date, 'now').and.returnValue(0);
-      snakeHead = snake().components.head;
+      snakeHead = snakeObject.components.head;
       snakeHead.ctx = mocks.ctx;
-    })
+    });
 
     describe('update', function(){
       it('should draw the head of the snake', function(){
@@ -18,65 +19,49 @@ define(['../snake', 'engine/engine', 'engine/mocks'], function(snake, engine, mo
 
         expect(mocks.ctx.rect)
         .toHaveBeenCalledWith(
-          snakeHead.position.x,
-          snakeHead.position.y,
-          snakeHead.width,
-          snakeHead.height
+          snakeObject.position.x,
+          snakeObject.position.y,
+          snakeObject.width,
+          snakeObject.height
         );
       });
 
       it('should move the head if enought time has past since last movement', function(){
         snakeHead.moveRate = 100;
-        expect(snakeHead.direction).toBe('right');
-        expect(snakeHead.position.x).toBe(25);
+        expect(snakeObject.position.x).toBe(25);
 
         timeSpy.and.returnValue(100);
         snakeHead.update();
-        expect(snakeHead.position.x).toBe(35);
+        expect(snakeObject.position.x).toBe(35);
 
         timeSpy.and.returnValue(199);
         snakeHead.update();
-        expect(snakeHead.position.x).toBe(35);
+        expect(snakeObject.position.x).toBe(35);
 
         timeSpy.and.returnValue(200);
         snakeHead.update();
-        expect(snakeHead.position.x).toBe(45);
+        expect(snakeObject.position.x).toBe(45);
       });
     });
 
     describe('turning', function(){
       describe('turnLeft()', function(){
         it('should change the snake head direction to the left', function(){
-          expect(snakeHead.direction).toBe('right');
+          snakeHead.velocity = engine.v2.new(10, 0);
           snakeHead.turnLeft();
-          expect(snakeHead.direction).toBe('up');
+          expect(snakeHead.velocity.x).toBe(0);
+          expect(snakeHead.velocity.y).toBe(-10);
         });
       });
 
       describe('turnRight()', function(){
         it('should change the snake head direction to the left', function(){
-          expect(snakeHead.direction).toBe('right');
+          snakeHead.velocity = engine.v2.new(10, 0);
           snakeHead.turnRight();
-          expect(snakeHead.direction).toBe('down');
+          expect(snakeHead.velocity.x).toBe(0);
+          expect(snakeHead.velocity.y).toBe(10);
         });
       });
-
-      it('cant turn twice before a movement', function(){
-        snakeHead.moveRate = 0;
-
-        expect(snakeHead.direction).toBe('right');
-        snakeHead.turnLeft();
-        expect(snakeHead.direction).toBe('up');
-        snakeHead.turnLeft();
-        expect(snakeHead.direction).toBe('up');
-        snakeHead.turnRight();
-        expect(snakeHead.direction).toBe('up');
-
-        snakeHead.update();
-
-        snakeHead.turnLeft();
-        expect(snakeHead.direction).toBe('left');
-      });
-    })
+    });
   });
 });
