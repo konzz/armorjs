@@ -12,6 +12,7 @@ define(['../apple','engine/engine', 'engine/mocks'], function(appleComponent, en
       appleObject = engine.gameObject('apple', {position: {x: 0, y: 0}});
 
       level.addGameObject(snake);
+      level.addGameObject(appleObject);
       level.play();
     });
 
@@ -21,6 +22,8 @@ define(['../apple','engine/engine', 'engine/mocks'], function(appleComponent, en
         var apple = appleComponent();
         spyOn(apple, 'eaten');
         appleObject.addComponent('consumable', apple);
+        apple.init();
+        apple.checkEaten();
         expect(apple.eaten).toHaveBeenCalled();
       });
     });

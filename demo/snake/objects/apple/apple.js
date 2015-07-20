@@ -14,13 +14,17 @@ define(['underscore', 'engine/engine'], function(_, engine){
       },
 
       update: function(){
+        checkEaten();
+        draw();
+      },
+
+      checkEaten: function(){
         var sameX = apple.gameObject.position.x === snake.position.x;
         var sameY = apple.gameObject.position.y === snake.position.y;
 
         if(sameX && sameY){
           apple.eaten();
         }
-        draw();
       },
 
       eaten: function(){
