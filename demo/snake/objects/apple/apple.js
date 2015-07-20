@@ -14,7 +14,7 @@ define(['underscore', 'engine/engine'], function(_, engine){
       },
 
       update: function(){
-        checkEaten();
+        apple.checkEaten();
         draw();
       },
 
