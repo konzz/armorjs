@@ -1,7 +1,7 @@
 {
-  "name": "game",
-  "version": "0.0.1",
-  "main": "path/to/main.css",
+  "name": "armor-js",
+  "version": "0.1.0",
+  "main": "engine/engine.js",
   "ignore": [
     "demo"
   ],
@@ -11,5 +11,25 @@
   },
   "devDependencies": {
     "jquery": "1.11.0"
-  }
+  },
+  "moduleType": {
+    "amd"
+  },
+  "authors":{
+    "alberto casado <acasadotorres@gmail.com>"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:konzz/armorjs.git"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "specs",
+    "test-main.js",
+    "node_modules",
+    "bower_components",
+    "demo",
+    "karma.conf.js"
+  ]
 }
