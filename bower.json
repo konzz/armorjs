@@ -2,9 +2,6 @@
   "name": "armor-js",
   "version": "0.1.0",
   "main": "engine/engine.js",
-  "ignore": [
-    "demo"
-  ],
   "dependencies": {
     "underscore": "1.6.0",
     "requirejs": "2.1.9"
@@ -12,12 +9,10 @@
   "devDependencies": {
     "jquery": "1.11.0"
   },
-  "moduleType": {
-    "amd"
-  },
-  "authors":{
+  "moduleType": "amd",
+  "author":[
     "alberto casado <acasadotorres@gmail.com>"
-  },
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:konzz/armorjs.git"
